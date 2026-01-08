@@ -368,3 +368,290 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the UI
     initializeUI();
 });
+
+// Add these functions to your existing script.js file
+
+// Tasks page functionality
+function initializeTasksPage() {
+    // Task form submission
+    const taskForm = document.getElementById('task-form');
+    if (taskForm) {
+        taskForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const title = this.querySelector('input[type="text"]').value;
+            const priority = this.querySelector('select').value;
+            const date = this.querySelector('input[type="date"]').value;
+            const category = this.querySelectorAll('select')[1].value;
+            const description = this.querySelector('textarea').value;
+            
+            if (title && date) {
+                // Create new task item
+                const newTask = {
+                    title,
+                    priority,
+                    date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                    category,
+                    description
+                };
+                
+                // Add to To Do list
+                addTaskToUI(newTask);
+                
+                // Reset form
+                this.reset();
+                
+                // Show success message
+                showSuccessMessage('New task added successfully!');
+                
+                // Update task counts
+                updateTaskCounts();
+            } else {
+                alert('Please fill in all required fields');
+            }
+        });
+    }
+    
+    // Event form submission
+    const eventForm = document.getElementById('event-form');
+    if (eventForm) {
+        eventForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const title = this.querySelector('input[type="text"]').value;
+            const date = this.querySelector('input[type="date"]').value;
+            const time = this.querySelector('input[type="time"]').value;
+            const type = this.querySelector('select').value;
+            const description = this.querySelector('textarea').value;
+            
+            if (title && date) {
+                // Create new event item
+                const newEvent = {
+                    title,
+                    date,
+                    time,
+                    type,
+                    description
+                };
+                
+                // Add to events list
+                addEventToUI(newEvent);
+                
+                // Reset form
+                this.reset();
+                
+                // Show success message
+                showSuccessMessage('New event added to calendar!');
+            } else {
+                alert('Please fill in all required fields');
+            }
+        });
+    }
+    
+    // Calendar navigation
+    const calendarPrev = document.querySelector('.calendar-prev');
+    const calendarNext = document.querySelector('.calendar-next');
+    
+    if (calendarPrev && calendarNext) {
+        calendarPrev.addEventListener('click', function() {
+            navigateCalendar('prev');
+        });
+        
+        calendarNext.addEventListener('click', function() {
+            navigateCalendar('next');
+        });
+    }
+    
+    // Initialize task counts
+    updateTaskCounts();
+}
+
+// Add task to UI
+function addTaskToUI(task) {
+    const toDoList = document.querySelector('.task-section:nth-child(2) .task-list');
+    
+    const taskItem = document.createElement('div');
+    taskItem.className = 'task-item';
+    taskItem.innerHTML = `
+        <div class="task-checkbox">
+            <input type="checkbox">
+        </div>
+        <div class="task-content">
+            <div class="task-title">${task.title}</div>
+            <div class="task-meta">${task.description || 'No description'} • ${task.priority} Priority</div>
+            <div class="task-date">Due: ${task.date}</div>
+        </div>
+    `;
+    
+    // Add checkbox functionality
+    const checkbox = taskItem.querySelector('input[type="checkbox"]');
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            taskItem.classList.add('completed');
+            taskItem.querySelector('.task-date').textContent = 'Completed';
+            taskItem.querySelector('.task-date').style.background = 'linear-gradient(to right, rgba(50, 205, 50, 0.2), rgba(34, 139, 34, 0.1))';
+            taskItem.querySelector('.task-date').style.color = '#32CD32';
+            
+            // Move to completed section after delay
+            setTimeout(() => {
+                const completedSection = document.querySelector('.task-section:nth-child(4) .task-list');
+                if (completedSection) {
+                    completedSection.appendChild(taskItem);
+                    updateTaskCounts();
+                }
+            }, 300);
+        }
+    });
+    
+    // Set original date
+    taskItem.setAttribute('data-original-date', `Due: ${task.date}`);
+    
+    toDoList.appendChild(taskItem);
+}
+
+// Add event to UI
+function addEventToUI(event) {
+    const eventList = document.querySelector('.event-list');
+    
+    const eventDate = new Date(event.date);
+    const day = eventDate.getDate();
+    const month = eventDate.toLocaleDateString('en-US', { month: 'short' });
+    
+    const eventItem = document.createElement('div');
+    eventItem.className = 'event-item';
+    eventItem.innerHTML = `
+        <div class="event-date">
+            <span class="event-day">${day}</span>
+            <span class="event-month">${month}</span>
+        </div>
+        <div class="event-details">
+            <div class="event-title">${event.title}</div>
+            <div class="event-info">${event.description || 'No description'} • ${event.time || 'All day'}</div>
+            <span class="event-type ${event.type}">${event.type}</span>
+        </div>
+    `;
+    
+    eventList.appendChild(eventItem);
+    
+    // Also add to calendar if date is in current month
+    updateCalendarWithEvent(event);
+}
+
+// Update task counts
+function updateTaskCounts() {
+    const toDoTasks = document.querySelectorAll('.task-section:nth-child(2) .task-item').length;
+    const inProgressTasks = document.querySelectorAll('.task-section:nth-child(3) .task-item').length;
+    const completedTasks = document.querySelectorAll('.task-section:nth-child(4) .task-item').length;
+    const totalTasks = toDoTasks + inProgressTasks + completedTasks;
+    const completionRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+    
+    // Update counts in UI
+    const taskCounts = document.querySelectorAll('.task-count');
+    if (taskCounts.length >= 3) {
+        taskCounts[0].textContent = `${toDoTasks} tasks`;
+        taskCounts[1].textContent = `${inProgressTasks} tasks`;
+        taskCounts[2].textContent = `${completedTasks} tasks`;
+    }
+    
+    // Update progress bar
+    const progressFill = document.querySelector('.progress-fill');
+    const progressPercent = document.querySelector('.progress-label span:last-child');
+    if (progressFill && progressPercent) {
+        progressFill.style.width = `${completionRate}%`;
+        progressPercent.textContent = `${completionRate}%`;
+    }
+    
+    // Update stat cards
+    const statValues = document.querySelectorAll('.stat-card .stat-value');
+    if (statValues.length >= 4) {
+        statValues[0].textContent = totalTasks;
+        statValues[1].textContent = toDoTasks;
+        statValues[2].textContent = inProgressTasks;
+        statValues[3].textContent = completedTasks;
+    }
+}
+
+// Calendar navigation
+function navigateCalendar(direction) {
+    const monthYear = document.querySelector('.calendar-month-year h3');
+    const currentDate = document.querySelector('.current-date');
+    
+    if (monthYear && currentDate) {
+        const currentText = monthYear.textContent;
+        const [currentMonth, currentYear] = currentText.split(' ');
+        
+        const months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        
+        let currentIndex = months.indexOf(currentMonth);
+        let year = parseInt(currentYear);
+        
+        if (direction === 'prev') {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = 11;
+                year--;
+            }
+        } else {
+            currentIndex++;
+            if (currentIndex > 11) {
+                currentIndex = 0;
+                year++;
+            }
+        }
+        
+        const newMonth = months[currentIndex];
+        monthYear.textContent = `${newMonth} ${year}`;
+        
+        // Update current date
+        const today = new Date();
+        currentDate.textContent = `Today: ${today.toLocaleDateString('en-US', { 
+            month: 'long', 
+            day: 'numeric', 
+            year: 'numeric' 
+        })}`;
+        
+        // Generate calendar for new month
+        generateCalendar(newMonth, year);
+    }
+}
+
+// Generate calendar for specific month
+function generateCalendar(month, year) {
+    // This is a simplified version - in a real app, you would generate the full calendar
+    const calendarGrid = document.querySelector('.calendar-grid');
+    if (calendarGrid) {
+        // Remove all days except headers
+        const days = calendarGrid.querySelectorAll('.calendar-day:not(.header)');
+        days.forEach(day => day.remove());
+        
+        // For now, just show a message
+        showSuccessMessage(`Calendar updated to ${month} ${year}`);
+    }
+}
+
+// Update calendar with new event
+function updateCalendarWithEvent(event) {
+    const eventDate = new Date(event.date);
+    const day = eventDate.getDate();
+    
+    // Find the calendar day and add event indicator
+    const calendarDays = document.querySelectorAll('.calendar-day:not(.header):not(.other-month)');
+    calendarDays.forEach(calendarDay => {
+        const dayNumber = parseInt(calendarDay.textContent);
+        if (dayNumber === day) {
+            if (!calendarDay.classList.contains('event')) {
+                calendarDay.classList.add('event');
+            }
+        }
+    });
+}
+
+// Add this initialization call to the existing DOMContentLoaded event listener
+// Find the initializeUI() function call and add after it:
+initializeUI();
+initializeTasksPage();

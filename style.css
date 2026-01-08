@@ -1229,3 +1229,203 @@ textarea.form-input {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to bottom, #A52A2A, var(--secondary));
 }
+
+/* Add these new styles to your existing style.css file */
+
+/* Tasks Page Styles */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.task-section {
+    margin-bottom: 1.5rem;
+}
+
+.task-section:last-child {
+    margin-bottom: 0;
+}
+
+.task-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(139, 0, 0, 0.1);
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.task-section-title i {
+    font-size: 0.8rem;
+}
+
+.task-count {
+    margin-left: auto;
+    font-size: 0.9rem;
+    color: var(--gray);
+    font-weight: 500;
+}
+
+.task-item.completed {
+    opacity: 0.7;
+    background: linear-gradient(to right, rgba(50, 205, 50, 0.1), rgba(34, 139, 34, 0.05));
+}
+
+.task-item.completed .task-date {
+    background: linear-gradient(to right, rgba(50, 205, 50, 0.2), rgba(34, 139, 34, 0.1));
+    color: #32CD32;
+}
+
+/* Calendar Page Styles */
+.calendar-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.calendar-controls .btn-secondary {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    width: auto;
+}
+
+.calendar-month-year {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-month-year h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.current-date {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.calendar-day.other-month {
+    background: rgba(255, 248, 220, 0.3);
+    color: var(--gray);
+    opacity: 0.5;
+}
+
+/* Events Styles */
+.event-list {
+    margin-top: 1rem;
+}
+
+.event-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(to right, rgba(255, 248, 220, 0.6), rgba(139, 0, 0, 0.05));
+    border-radius: var(--radius-sm);
+    border-left: 4px solid var(--secondary);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.event-item:hover {
+    transform: translateX(5px);
+    background: linear-gradient(to right, rgba(255, 248, 220, 0.8), rgba(139, 0, 0, 0.1));
+    border-color: rgba(218, 165, 32, 0.4);
+}
+
+.event-item:last-child {
+    margin-bottom: 0;
+}
+
+.event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, var(--primary), #A52A2A);
+    color: var(--warning);
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.event-day {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.event-month {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.event-details {
+    flex: 1;
+}
+
+.event-title {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.event-info {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 0.3rem;
+}
+
+.event-type {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.event-type.academic {
+    background: rgba(30, 144, 255, 0.2);
+    color: #1E90FF;
+    border: 1px solid rgba(30, 144, 255, 0.3);
+}
+
+.event-type.personal {
+    background: rgba(50, 205, 50, 0.2);
+    color: #32CD32;
+    border: 1px solid rgba(50, 205, 50, 0.3);
+}
+
+.event-type.deadline {
+    background: rgba(255, 69, 0, 0.2);
+    color: #FF4500;
+    border: 1px solid rgba(255, 69, 0, 0.3);
+}
+
+/* Time input styling */
+input[type="time"] {
+    font-family: inherit;
+}
+
+/* Responsive adjustments for form rows */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .calendar-controls {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .calendar-controls .btn-secondary {
+        width: 100%;
+    }
+}

@@ -368,6 +368,367 @@
                 </div>
             </section>
 
+            <!-- Tasks Page -->
+            <section id="tasks" class="page">
+                <!-- Task Summary -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-tasks"></i> Task Summary</h2>
+                        <span class="card-action">View All</span>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Total Tasks</div>
+                        </div>
+                        <div class="stat-card allowance">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">To Do</div>
+                        </div>
+                        <div class="stat-card expense">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">In Progress</div>
+                        </div>
+                        <div class="stat-card weekly">
+                            <div class="stat-value">1</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container mt-2">
+                        <div class="progress-label">
+                            <span>Task Completion</span>
+                            <span>8%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 8%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New Task -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                    </div>
+                    
+                    <form id="task-form">
+                        <div class="form-group">
+                            <label class="form-label">Task Title</label>
+                            <input type="text" class="form-input" placeholder="What needs to be done?">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select">
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Due Date</label>
+                                <input type="date" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option value="academic">Academic</option>
+                                <option value="personal">Personal</option>
+                                <option value="work">Work</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input" placeholder="Task details..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+                </div>
+
+                <!-- Task Lists -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-list-check"></i> My Tasks</h2>
+                        <div class="task-filter">
+                            <select class="form-select" style="padding: 0.3rem 0.5rem; font-size: 0.9rem;">
+                                <option>All Tasks</option>
+                                <option>To Do</option>
+                                <option>In Progress</option>
+                                <option>Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- To Do Tasks -->
+                    <div class="task-section">
+                        <h3 class="task-section-title">
+                            <i class="fas fa-circle" style="color: var(--danger);"></i> To Do
+                            <span class="task-count">4 tasks</span>
+                        </h3>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <div class="task-checkbox">
+                                    <input type="checkbox">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Math Assignment</div>
+                                    <div class="task-meta">Chapter 5 Exercises • High Priority</div>
+                                    <div class="task-date">Due: Oct 30</div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox">
+                                    <input type="checkbox">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Research Paper</div>
+                                    <div class="task-meta">Literature Review Section • Medium Priority</div>
+                                    <div class="task-date">Due: Nov 2</div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox">
+                                    <input type="checkbox">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Web Design Study</div>
+                                    <div class="task-meta">CSS Grid and Flexbox • Low Priority</div>
+                                    <div class="task-date">Due: Nov 4</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- In Progress Tasks -->
+                    <div class="task-section">
+                        <h3 class="task-section-title">
+                            <i class="fas fa-circle" style="color: var(--warning);"></i> In Progress
+                            <span class="task-count">3 tasks</span>
+                        </h3>
+                        <div class="task-list">
+                            <div class="task-item">
+                                <div class="task-checkbox">
+                                    <input type="checkbox">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Project Proposal</div>
+                                    <div class="task-meta">HustleHub Documentation • High Priority</div>
+                                    <div class="task-date">Due: Nov 5</div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-item">
+                                <div class="task-checkbox">
+                                    <input type="checkbox">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Budget Report</div>
+                                    <div class="task-meta">Monthly Analysis • Medium Priority</div>
+                                    <div class="task-date">Due: Nov 3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Completed Tasks -->
+                    <div class="task-section">
+                        <h3 class="task-section-title">
+                            <i class="fas fa-circle" style="color: var(--success);"></i> Completed
+                            <span class="task-count">1 task</span>
+                        </h3>
+                        <div class="task-list">
+                            <div class="task-item completed">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" checked>
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Study Group Meeting</div>
+                                    <div class="task-meta">Math Problem Solving • Low Priority</div>
+                                    <div class="task-date">Completed: Oct 28</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calendar Page -->
+            <section id="calendar" class="page">
+                <!-- Calendar Header -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-calendar-alt"></i> November 2024</h2>
+                        <div class="calendar-controls">
+                            <button class="btn-secondary calendar-prev">‹</button>
+                            <button class="btn-secondary calendar-next">›</button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-month-year">
+                        <h3>November 2024</h3>
+                        <p class="current-date">Today: November 5, 2024</p>
+                    </div>
+                    
+                    <div class="calendar-grid">
+                        <div class="calendar-day header">Sun</div>
+                        <div class="calendar-day header">Mon</div>
+                        <div class="calendar-day header">Tue</div>
+                        <div class="calendar-day header">Wed</div>
+                        <div class="calendar-day header">Thu</div>
+                        <div class="calendar-day header">Fri</div>
+                        <div class="calendar-day header">Sat</div>
+                        
+                        <!-- Calendar days -->
+                        <div class="calendar-day other-month">27</div>
+                        <div class="calendar-day other-month">28</div>
+                        <div class="calendar-day other-month">29</div>
+                        <div class="calendar-day other-month">30</div>
+                        <div class="calendar-day other-month">31</div>
+                        <div class="calendar-day">1</div>
+                        <div class="calendar-day">2</div>
+                        <div class="calendar-day">3</div>
+                        <div class="calendar-day event">4</div>
+                        <div class="calendar-day today">5</div>
+                        <div class="calendar-day">6</div>
+                        <div class="calendar-day event">7</div>
+                        <div class="calendar-day">8</div>
+                        <div class="calendar-day">9</div>
+                        <div class="calendar-day event">10</div>
+                        <div class="calendar-day">11</div>
+                        <div class="calendar-day">12</div>
+                        <div class="calendar-day">13</div>
+                        <div class="calendar-day">14</div>
+                        <div class="calendar-day">15</div>
+                        <div class="calendar-day">16</div>
+                        <div class="calendar-day">17</div>
+                        <div class="calendar-day">18</div>
+                        <div class="calendar-day">19</div>
+                        <div class="calendar-day">20</div>
+                        <div class="calendar-day">21</div>
+                        <div class="calendar-day">22</div>
+                        <div class="calendar-day">23</div>
+                        <div class="calendar-day">24</div>
+                        <div class="calendar-day">25</div>
+                        <div class="calendar-day">26</div>
+                        <div class="calendar-day">27</div>
+                        <div class="calendar-day">28</div>
+                        <div class="calendar-day">29</div>
+                        <div class="calendar-day">30</div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-bell"></i> Upcoming Events</h2>
+                        <span class="card-action">Add Event</span>
+                    </div>
+                    
+                    <div class="event-list">
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="event-day">4</span>
+                                <span class="event-month">Nov</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">Math Class</div>
+                                <div class="event-info">Room 201 • 9:00 AM - 10:30 AM</div>
+                                <span class="event-type academic">Academic</span>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="event-day">5</span>
+                                <span class="event-month">Nov</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">Project Submission</div>
+                                <div class="event-info">HustleHub Documentation • 11:59 PM</div>
+                                <span class="event-type deadline">Deadline</span>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="event-day">7</span>
+                                <span class="event-month">Nov</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">Budget Planning</div>
+                                <div class="event-info">Monthly Review • 2:00 PM - 3:00 PM</div>
+                                <span class="event-type personal">Personal</span>
+                            </div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="event-day">10</span>
+                                <span class="event-month">Nov</span>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-title">Final Exam</div>
+                                <div class="event-info">All Subjects • 8:00 AM - 5:00 PM</div>
+                                <span class="event-type academic">Academic</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Event Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-plus"></i> Add Event</h2>
+                    </div>
+                    
+                    <form id="event-form">
+                        <div class="form-group">
+                            <label class="form-label">Event Title</label>
+                            <input type="text" class="form-input" placeholder="Event name">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Time</label>
+                                <input type="time" class="form-input">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Event Type</label>
+                            <select class="form-select">
+                                <option value="academic">Academic</option>
+                                <option value="personal">Personal</option>
+                                <option value="deadline">Deadline</option>
+                                <option value="meeting">Meeting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-input" placeholder="Event details..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Add Event</button>
+                    </form>
+                </div>
+            </section>
+
             <!-- Profile Page -->
             <section id="profile" class="page">
                 <div class="card">
